@@ -1,0 +1,23 @@
+/* Gallery.css */
+
+.gallery-masonry {
+    display: flex;
+    margin-left: -16px; /* Adjust based on your needs */
+    width: auto;
+  }
+  
+  .gallery-masonry-column {
+    background-clip: padding-box;
+    padding: 0 16px; /* Adjust based on your needs */
+    box-sizing: border-box;
+  }
+  
+  .gallery-item {
+    margin-bottom: 16px; /* Adjust based on your needs */
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+  }
+  
