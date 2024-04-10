@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./ArtRequirementsForm.css";
+import Spinner from 'react-bootstrap/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const ArtRequirementsForm = () => {
+  const navigate = useNavigate();
+  const [loading,  setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,6 +15,8 @@ const ArtRequirementsForm = () => {
     members: [{ photo: null, dress: null, description: "" }],
     backgroundImage: null,
     combinedDescription: "",
+    captcha: "", // New field for CAPTCHA
+    randomNumber: generateRandomNumber() // New field to store random number
   });
 
   const [modalContent, setModalContent] = useState({
@@ -18,6 +24,10 @@ const ArtRequirementsForm = () => {
     type: "success", // or 'error'
     message: "",
   });
+
+  function generateRandomNumber() {
+    return Math.floor(Math.random() * 10000); // Generate random number between 0 and 9999
+  }
 
   const handleInputChange = (index, field, value) => {
     const updatedMembers = [...formData.members];
@@ -32,23 +42,42 @@ const ArtRequirementsForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.captcha !== formData.randomNumber.toString()) {
+      alert("Please enter the correct number from the image.");
+      return;
+    }
+
+    setLoading(true);
+    const newformData = new FormData();
+    newformData.append('name', formData.name);
+    newformData.append('email', formData.email);
+    newformData.append('phoneNumber', formData.phoneNumber);
+    newformData.append('combinedDescription', formData.combinedDescription);
+    newformData.append('backgroundImage', formData.backgroundImage);
+    formData.members.forEach((member, index) => {
+      newformData.append(`members[${index}][photo]`, member.photo);
+      newformData.append(`members[${index}][dress]`, member.dress);
+      newformData.append(`members[${index}][description]`, member.description);
+    });
+
     // Post data to your endpoint using the fetch API
     try {
-      const response = await fetch("your_endpoint_here", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/submit-form/`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: newformData,
       });
-
+  
       if (response.ok) {
+      const responseData = await response.json(); 
         // Handle successful response
         setModalContent({
           show: true,
           type: "success",
-          message: "Form submitted successfully!",
+          message: `"Form submitted successfully! Please Note Your Order ID : ${responseData.tracking_id}"`,
         });
+          
+
+        navigate(`/confirmation/${responseData.tracking_id}`);
         console.log("Form data submitted successfully!");
       } else {
         // Handle error response
@@ -67,6 +96,8 @@ const ArtRequirementsForm = () => {
         message: "Fetch error. Please try again.",
       });
       console.error("Fetch error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -129,7 +160,13 @@ const ArtRequirementsForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    loading?<center><h1><Spinner
+    as="span"
+    animation="grow"
+    role="status"
+    aria-hidden="true"
+  />
+  Loading...</h1></center>:<form onSubmit={handleFormSubmit}>
       <h1>Number of Members: {formData.members.length}</h1>
 
       <label>
@@ -233,6 +270,24 @@ const ArtRequirementsForm = () => {
         />
       </label>
       <br />
+      {/* Add CAPTCHA */}
+      <label>
+        Enter the number shown in the image:
+        <input
+          type="text"
+          value={formData.captcha}
+          onChange={(e) =>
+            setFormData({ ...formData, captcha: e.target.value })
+          }
+          required
+        />
+        {/* Display random number as image */}
+        <img
+          src={`https://dummyimage.com/100x50/000/fff&text=${formData.randomNumber}`}
+          alt="CAPTCHA"
+          style={{ width: "25%", marginBottom: "10px" }}
+        />
+      </label>
       <button className="btn-success" type="submit">
         Submit
       </button>

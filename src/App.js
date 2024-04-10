@@ -13,8 +13,10 @@ import InfoSection from "./components/InfoSection.js";
 import Footer from "./components/Footer.js";
 import { useEffect } from "react";
 import $ from "jquery";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
 import ArtRequirementsForm from "./components/ArtRequirementsForm.js";
+import ConfirmationPage from "./components/ConfirmationPage.js";
+import Tracker from "./components/Tracker.js"
 
 function App() {
   return (
@@ -27,10 +29,11 @@ function App() {
             exact
             element={
               <>
-                <div className="hero_area">
+                {/* <div className="hero_area">
                   <Header />
                   <Slider />
-                </div>
+                </div> */}
+                <Header />
                 <CustomNav />
                 <About />
               </>
@@ -41,6 +44,7 @@ function App() {
             exact
             element={
               <>
+                <Header />
                 <CustomNav />
                 <ArtRequirementsForm />
                 {/* <ContactSection /> */}
@@ -52,10 +56,11 @@ function App() {
             exact
             element={
               <>
-                <div className="hero_area">
+                {/* <div className="hero_area">
                   <Header />
                   <Slider />
-                </div>
+                </div> */}
+                <Header />
                 <CustomNav />
                 <GallerySection />
               </>
@@ -66,10 +71,11 @@ function App() {
             exact
             element={
               <>
-                <div className="hero_area">
+                {/* <div className="hero_area">
                   <Header />
                   <Slider />
-                </div>
+                </div> */}
+                <Header />
                 <CustomNav />
                 <br />
                 <BlogSection />
@@ -81,14 +87,26 @@ function App() {
             exact
             element={
               <>
-                <div className="hero_area">
+                {/* <div className="hero_area">
                   <Header />
                   <Slider />
-                </div>
+                </div> */}
+                <Header />
                 <CustomNav />
                 <ContactSection />
               </>
             }
+          />
+          <Route
+            path="/confirmation/:tracking_id"
+            exact
+            element={<>
+              <Header /><ConfirmationPageRoute /></>}
+          />
+          <Route
+            path="/tracker"
+            exact
+            element={<><Header /> <CustomNav /><br></br><Tracker /><br></br></>}
           />
         </Routes>
         <Footer />
@@ -96,6 +114,17 @@ function App() {
     </Router>
   );
 }
+
+const ConfirmationPageRoute = () => {
+  let { tracking_id } = useParams(); // Accessing orderId parameter from the URL
+  return (
+    <>
+      {/* You can include your Header and Slider components here if needed */}
+      <CustomNav />
+      <ConfirmationPage tracking_id={tracking_id} /> {/* Passing orderId as a prop */}
+    </>
+  );
+};
 
 function Home() {
   useEffect(() => {

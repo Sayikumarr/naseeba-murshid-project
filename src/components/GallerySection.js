@@ -1,30 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Gallery from "./Gallery";
 
 function GallerySection() {
-  const images = [
-    { url: "gallerypics/images/photo_(1).jpg", alt: "Image 1" },
-    { url: "gallerypics/images/photo_(2).jpg", alt: "Image 2" },
-    { url: "gallerypics/images/photo_(3).jpg", alt: "Image 3" },
-    { url: "gallerypics/images/photo_(4).jpg", alt: "Image 4" },
-    { url: "gallerypics/images/photo_(5).jpg", alt: "Image 5" },
-    { url: "gallerypics/images/photo_(6).jpg", alt: "Image 6" },
-    { url: "gallerypics/images/photo_(7).jpg", alt: "Image 7" },
-    { url: "gallerypics/images/photo_(8).jpg", alt: "Image 8" },
-    { url: "gallerypics/images/photo_(9).jpg", alt: "Image 9" },
-    { url: "gallerypics/images/photo_(10).jpg", alt: "Image 10" },
-    { url: "gallerypics/images/photo_(11).jpg", alt: "Image 11" },
-    { url: "gallerypics/images/photo_(12).jpg", alt: "Image 12" },
-    { url: "gallerypics/images/photo_(13).jpg", alt: "Image 13" },
-    { url: "gallerypics/images/photo_(14).jpg", alt: "Image 14" },
-    { url: "gallerypics/images/photo_(15).jpg", alt: "Image 15" },
-    { url: "gallerypics/images/photo_(16).jpg", alt: "Image 16" },
-    { url: "gallerypics/images/photo_(17).jpg", alt: "Image 17" },
-    { url: "gallerypics/images/photo_(18).jpg", alt: "Image 18" },
-    { url: "gallerypics/images/photo_(19).jpg", alt: "Image 19" },
-    { url: "gallerypics/images/photo_(20).jpg", alt: "Image 20" },
-    { url: "gallerypics/images/photo_(21).jpg", alt: "Image 21" },
-  ];
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/images/`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch images");
+        }
+        const data = await response.json();
+        setImages(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    fetchImages();
+  }, []);
 
   return (
     <section className="gallery_section layout_padding">

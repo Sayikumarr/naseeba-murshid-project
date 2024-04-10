@@ -17,7 +17,7 @@ const Gallery = ({ images }) => {
     >
       {images.map((image, index) => (
         <div key={index} className="gallery-item">
-          <img src={`../${image.url}`} alt={image.alt} loading="lazy" />
+          <img src={image.image} alt={image.alt_text} loading="lazy" />
         </div>
       ))}
     </Masonry>

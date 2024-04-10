@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function About() {
   return (
@@ -33,7 +34,7 @@ function About() {
                 </p>
               </p>
               <div>
-                <a href="./get-yours">Make a Request!</a>
+                <Link to="./get-yours">Make a Request!</Link>
               </div>
             </div>
           </div>

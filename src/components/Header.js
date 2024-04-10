@@ -6,7 +6,7 @@ function Header() {
     <header className="header_section">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a className="navbar-brand" href="../">
+          <div className="navbar-logo-barger"><a className="navbar-brand" href="../">
             <img src="images/logo.png" alt="" />
             <span>Naseeba.Murshid</span>
           </a>
@@ -20,7 +20,7 @@ function Header() {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon" />
-          </button>
+          </button></div>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto mr-2">
               <li className="nav-item active">
@@ -44,13 +44,18 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="../tracker">
+                  Track Order
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="../contact">
-                  Contact us
+                  Contact Us
                 </Link>
               </li>
             </ul>
             <div className="user_option">
-              <div className="login_btn-container btn-block btn-dark">
+              <div className="login_btn-container btn-block btn-success ">
                 <Link to="../get-yours">Get Yours</Link>
               </div>
             </div>

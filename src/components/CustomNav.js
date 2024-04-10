@@ -28,8 +28,13 @@ function CustomNav() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to="../tracker" className="nav-link">
+                Track Order
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to="../contact" className="nav-link">
-                Contact us
+                Contact Us
               </Link>
             </li>
           </ul>

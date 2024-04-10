@@ -1,0 +1,63 @@
+.tracker {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .tracker h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .input-type {
+    margin-bottom: 20px;
+  }
+  
+  .input-type label {
+    margin-right: 20px;
+  }
+  
+  .inputs {
+    margin-bottom: 20px;
+  }
+  
+  .inputs input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .confirmation-details {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .confirmation-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .confirmation-details p {
+    margin-bottom: 5px;
+  }
+  
