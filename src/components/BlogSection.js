@@ -4,10 +4,10 @@ function BlogSection() {
   const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
-    // Sample API endpoint for testing
-    const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+    // Endpoint of your Django REST API
+    const apiUrl = `${process.env.REACT_APP_API_URL}/blogposts/`;
 
-    // Fetch data from the API endpoint
+    // Fetch data from the Django API endpoint
     const fetchData = async () => {
       try {
         const response = await fetch(apiUrl);
@@ -44,11 +44,16 @@ function BlogSection() {
                   <div className="client_box b-1">
                     <div className="client-id">
                       <div className="img-box">
-                        <img src="images/client-1.jpg" alt="" />
+                        <img height={100} width={100} src={blog.author_photo} alt="" />
                       </div>
                       <div className="name">
-                        <h5>smirth jon</h5>
-                        <p>client</p>
+                        <h5>{blog.author}</h5>
+                        <div className="rating" style={{ color: "orange", marginTop: "10px" }}>
+                          Rating: {Array.from({ length: blog.rating }).map((_, i) => (
+                            <span key={i}>★</span>
+                          ))}
+                        </div>
+                        <p>Created At: {blog.created_at}</p>
                       </div>
                     </div>
                     <div className="detail">
@@ -56,31 +61,14 @@ function BlogSection() {
                         className="d-flex flex-column flex-md-row"
                         style={{ gap: "20px" }}
                       >
-                        <p>
-                          It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout. The point of using Lorem Ipsum
-                          is that it has a more-or-less normal distribution of
-                          letters, as opposed to using 'Content here, content
-                          here', making it look like readable English. Many
-                          desktop publishing packages and web page editors now
-                          use Lorem Ipsum as their default model It is a long
-                          established fact that a reader will be distracted by
-                          the readable content of a page when looking at its
-                          layout. The point of using Lorem Ipsum is that it has
-                          a more-or-less normal distribution of letters, as
-                          opposed to using 'Content here, content here', making
-                          it look like readable English. Many desktop publishing
-                          packages and web page editors now use Lorem Ipsum as
-                          their default model
-                        </p>
+                        <p>{blog.content}</p>
                         <div className="d-flex flex-column">
-                        <img
-                          className="card-img"
-                          // style={{ width: "100%" }}
-                          src="../gallerypics/images/photo_(13).jpg"
-                          alt=""
-                        />
+                          <img
+                            className="card-img"
+                            width="50%"
+                            src={blog.image}
+                            alt={blog.author}
+                          />
                         </div>
                       </div>
                     </div>

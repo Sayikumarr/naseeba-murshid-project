@@ -37,15 +37,16 @@ function InfoSection() {
               <h4>Location</h4>
               <div>
                 <img src="images/location.png" alt="" />
-                <p>104 loram ipusm</p>
+                <p>Kerala, India
+</p>
               </div>
               <div>
                 <img src="images/telephone.png" alt="" />
-                <p>( +01 1234567890 )</p>
+                <p>( +91 95260 01177 )</p>
               </div>
               <div>
                 <img src="images/envelope.png" alt="" />
-                <p>demo@gmail.com</p>
+                <p>Contact@naseebamurshid.in</p>
               </div>
             </div>
           </div>
@@ -54,22 +55,22 @@ function InfoSection() {
               <h4>Social Link</h4>
               <div className="social_container">
                 <div>
-                  <a href>
+                  <a href="https://www.instagram.com/naseeba.murshid/?hl=en">
                     <img src="images/facebook-logo.png" alt="" />
                   </a>
                 </div>
                 <div>
-                  <a href>
+                  <a href="https://www.youtube.com/channel/UC-AN96ax_xjm4hcf2JD0hHQ">
                     <img src="images/twitter-logo.png" alt="" />
                   </a>
                 </div>
                 <div>
-                  <a href>
+                  <a href="https://www.instagram.com/naseeba.murshid/?hl=en">
                     <img src="images/instagram.png" alt="" />
                   </a>
                 </div>
                 <div>
-                  <a href>
+                  <a href="https://www.youtube.com/channel/UC-AN96ax_xjm4hcf2JD0hHQ">
                     <img src="images/linkedin-sign.png" alt="" />
                   </a>
                 </div>
